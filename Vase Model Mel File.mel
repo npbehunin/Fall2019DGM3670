@@ -53,37 +53,29 @@ PolyExtrude;
 hilite vase_model.f[120:139] ;
 selectMode -component ;
 select -r vase_model.f[120:139] ;
-polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150842 -pvy 0.6309559941 -pvz 0.1310068738 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace1 // 
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150842 -pvy 0.6309559941 -pvz 0.1310068738 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139]; 
 scale -r -p -0.201515cm 0.630956cm 0.131007cm 0.830786 1 0.830786 ;
 PolyExtrude;
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150842 -pvy 0.6309559941 -pvz 0.1310068317 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace2 // 
 scale -r -p -0.201515cm 0.630956cm 0.131007cm 0.71281 1 0.71281 ;
 move -r -os -wd 0 -0.0726 0 ;
 PolyExtrude;
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015151262 -pvy 0.5583560467 -pvz 0.1310068317 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace3 //;
 hilite vase_model.f[120:139] ;
 selectMode -component ;
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150842 -pvy 0.6309559941 -pvz 0.1310068738 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace1 // 
 hilite vase_model.f[120:139] polyExtrudeFace1 ;
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150842 -pvy 0.6309559941 -pvz 0.1310068527 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace3 // 
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150631 -pvy 0.5583559871 -pvz 0.1310069369 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace5 // 
-// Result: polyExtrudeFace6 // 
 select -add vase_model.f[120:139] ;
 PolyExtrude;
 select -r vase_model.f[120:139] ;
 polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.2015150421 -pvy 0.5583559871 -pvz 0.1310069579 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 vase_model.f[120:139];
-// Result: polyExtrudeFace7 // 
 scale -r -p -0.201515cm 0.558356cm 0.131007cm 0.641069 1 0.641069 ;
 move -r -os -wd 0 -0.866259 0 ;
 select -d vase_model.f[120:139] ;
