@@ -1,0 +1,23 @@
+{
+float $moveDistZ = 1;
+int $rotDist = 15;
+float $moveDistY = 1;
+float $radius = .5;
+string $obj[];
+string $objects[];
+string $objName;
+
+for ($i = 0; $i < 100; ++$i)
+{
+    $obj = `polySphere -radius $radius`;
+    $objects[size($objects)] = $obj[0];
+    rotate -absolute 0 ($rotDist) 0 $obj[0];
+    move -r -os 0 ($moveDistY) ($moveDistZ + $radius) $obj[0];
+    $radius = $radius * 1.02;
+    $rotDist = $rotDist + 15;
+    $moveDistZ = $moveDistZ * 1.04;
+    $moveDistY = $moveDistY * 1.05;
+    $objName = $obj[0];
+    //print ($objName);
+}
+}
