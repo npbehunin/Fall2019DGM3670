@@ -18,6 +18,30 @@ for ($i = 0; $i < 100; ++$i)
     $moveDistZ = $moveDistZ * 1.04;
     $moveDistY = $moveDistY * 1.05;
     $objName = $obj[0];
-    //print ($objName);
 }
-}
+polyCylinder -h .3 -r 8;
+select -r pCylinder1.f[21] ;
+scale -r -p -9.53674e-07cm 0.15cm -1.43051e-06cm 0.513816 1 0.513816 ;
+PolyExtrude;
+hilite pCylinder1.f[21] ;
+selectMode -component ;
+select -r pCylinder1.f[21] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -9.536743164e-07 -pvy 0.150000006 -pvz -1.430511475e-06 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[21];
+scale -r -p -9.53674e-07cm 0.15cm -1.43051e-06cm 0.642701 1 0.642701 ;
+move -r -os -wd 0 0.480529 0 ;
+PolyExtrude;
+select -r pCylinder1.f[21] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -9.536743164e-07 -pvy 0.630528748 -pvz -1.430511475e-06 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[21];
+scale -r -p -9.53674e-07cm 0.630529cm -1.43051e-06cm 0.526391 1 0.526391 ;
+move -r -os -wd 0 0.786742 0 ;
+PolyExtrude;
+select -r pCylinder1.f[21] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -9.536743164e-07 -pvy 1.417270422 -pvz -1.430511475e-06 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCylinder1.f[21];
+scale -r -p -9.53674e-07cm 1.41727cm -1.43051e-06cm 0.540244 1 0.540244 ;
+move -r -os -wd 0 132.97429 0 ;
+select -cl  ;
+select -r pSphere4 pSphere5 pSphere61 pSphere60 pSphere64 pSphere63 pSphere62 pSphere6 pSphere21 pSphere20 pSphere71 pSphere70 pSphere74 pSphere73 pSphere72 pSphere56 pSphere55 pSphere59 pSphere58 pSphere57 pSphere8 pSphere7 pSphere39 pSphere38 pSphere37 pSphere41 pSphere40 pSphere81 pSphere80 pSphere84 pSphere83 pSphere82 pSphere34 pSphere33 pSphere32 pSphere36 pSphere35 pSphere9 pSphere10 pSphere54 pSphere53 pSphere52 pSphere29 pSphere28 pSphere27 pSphere31 pSphere30 pSphere19 pSphere18 pSphere17 pSphere24 pSphere23 pSphere22 pSphere44 pSphere43 pSphere42 pSphere46 pSphere45 pSphere3 pSphere2 pSphere1 pSphere11 pSphere12 pSphere26 pSphere25 pSphere14 pSphere13 pSphere76 pSphere75 pSphere79 pSphere78 pSphere77 pSphere49 pSphere48 pSphere47 pSphere51 pSphere50 pSphere16 pSphere15 pCylinder1 pSphere100 pSphere91 pSphere90 pSphere94 pSphere93 pSphere92 pSphere66 pSphere65 pSphere69 pSphere68 pSphere67 pSphere96 pSphere95 pSphere99 pSphere98 pSphere97 pSphere86 pSphere85 pSphere89 pSphere88 pSphere87 ;
+polyUnite -n "spiral_thing_obj";
+group -em -name "geo_grp";
+parent spiral_thing_obj geo_grp;
+};
