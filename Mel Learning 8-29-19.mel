@@ -1,0 +1,28 @@
+//string $objs[];
+//$objs[0] = `polySphere`;
+//$objs[1] = `polySphere`;
+//ERROR: Cannot convert data String[] to String.
+//This is because polySphere is String array. It returns an object string and node string.
+
+string $tempArray[];
+string $obj;
+string $objects[];
+$tempArray = `polySphere`;
+$obj = $tempArray[0];
+print("The object name is " + $tempArray[0] + ", and the node name is " + $tempArray[1] + ".");
+//This works because we assign the polySphere (string array) as something first, then we can
+//access the name in index 0 and the node in index 1.
+
+string $names[] = {"Mel", "Todd", "Phil"};
+$names[0] = "Tony";
+print "\n"; //New line
+print $names;
+//Assigning things inside an array requires {} instead of [].
+
+string $newNames[] = {"Tony", "Mel", "Todd", "Phil", "Ted"};
+int $size = size($newNames);
+$newNames[size($newNames)] = "Mary";
+print "\n";
+print $newNames;
+//Get the last index outside the array (5) and assign it to "Mary".
+//(It's basically the same as saying $newNames[5].)
