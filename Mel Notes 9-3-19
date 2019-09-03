@@ -1,0 +1,17 @@
+//NOTES 9/3/19
+
+string $sels[] = `ls -sl`; //Equal to the currently selected objects. (ls = objects in scene, -sl = selected)
+
+if (size($sels) > 0) { //If the selection is greater than 0...
+	print ("You have " + size($sels) + " objects selected.");
+}
+else {
+	error ("No objects selected."); //Stops the script here. Similar to print.
+}
+
+//Print notes:
+// \t = tab
+// \r = carriage return (Whatever than means)
+// \n = new line. Similar to \r.
+// \\ = "\".
+// \ = "".

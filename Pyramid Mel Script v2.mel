@@ -1,0 +1,45 @@
+{
+float $moveDistZ = 0;
+float $moveDistX = 0;
+float $moveDistY = -1.05;
+float $removeAmountX = 0;
+float $removeAmountZ = 0;
+float $size = 7; //The size of the pyramid
+string $cubeObject[];
+string $cubeObjectList[];
+
+for ($a = 0; $a < $size + 1; $a++) //y position of pyramid
+{ 
+    $moveDistY = $moveDistY + 1.05;
+	$moveDistZ = 0;
+	$removeAmountZ = $removeAmountZ + 2;
+	$removeAmountX = $removeAmountX + 2;
+    for ($b = 0; $b < ($size * 2) + 2 - $removeAmountZ; $b++) //z position of pyramid
+    {
+        $moveDistZ = $moveDistZ - 1.05;
+        $moveDistX = 0;
+        for ($i = 0; $i < ($size * 2) + 2 - $removeAmountX; $i++) //x position of pyramid
+        {
+            $cubeObject = `polyCube`;
+            stringArrayInsertAtIndex($i, $cubeObjectList, $cubeObject[0]);
+            move -r -os ($moveDistX + $moveDistY) ($moveDistY) ($moveDistZ - $moveDistY);
+            $moveDistX = $moveDistX + 1.05;
+        }
+    }
+}
+select $cubeObjectList;
+polyUnite -n "Pyramid";
+move -r -os (-$size - ($size * .05)) 1.5 ($size + 1 - ($size * .05)); //Centers the pyramid
+polyPlane -w 30 -h 30 -sx 1 -sy 1 -n "Platform";
+select -r Platform.f[0] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -smoothingAngle 30 Platform.f[0];
+setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 1 ;
+scale -r -p 0cm 0.880533cm 0cm 0.906361 1 0.906361 ;
+select -r Platform ;
+setAttr "Platform.rotateY" -45;
+group -em -name "Geometry";
+select -r Pyramid Platform;
+parent Pyramid Geometry;
+parent Platform Geometry;
+DeleteAllHistory;
+}
