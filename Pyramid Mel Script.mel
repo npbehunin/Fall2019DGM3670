@@ -1,0 +1,49 @@
+{
+float $moveDistZ = -1;
+float $moveDistX = 1;
+float $moveSection = 0;
+float $moveSectionUp = 0;
+float $removeAmount = 0;
+string $obj[];
+string $newobj[];
+string $sectionobj[];
+string $objects[];
+string $rowobjects[];
+string $rowobjectsname[];
+for ($a = 0; $a < 10; ++$a) //y position of pyramid
+{
+    $moveDistZ = -1;
+    $moveDistX = 1;
+    group -em -name "newGroup";
+    for ($i = 0; $i < 20 - $removeAmount; ++$i) //z position of pyramid
+    {
+        $obj = `polyCube`;
+        $objects[size($objects)] = $obj[0];
+        move -r -os 0 0 ($moveDistZ) $obj[0];
+        $moveDistZ = $moveDistZ - 1.05;
+        parent $obj[0] newGroup;
+    }
+    select -r newGroup;
+    polyUnite -n "row1";
+
+    group -em -name "oyGroup";
+    for ($i = 0; $i < 19; ++$i) //x position of pyramid
+    {
+        $rowobjects = `duplicate row1`;
+        print ($rowobjects);
+        move -r -os ($moveDistX) 0 0 $rowobjects[0]; 
+        $moveDistX = $moveDistX + 1.05;
+        parent $rowobjects[0] oyGroup;
+        //The reason this "works" is because each time we duplicate, the new duplicated object is in row1's new position.
+        //To get the correct movement, we want to tell each individual object to move by itself.
+    }
+    
+    select -r row1 row2 row3 row4 row5 row6 row7 row8 row9 row10 row11 row12 row13 row14 row15 row16 row17 row18 row19 row20 ;
+    polyUnite -n "section1";
+    move -r -os ($moveSectionUp) ($moveSectionUp) ($moveSection); //Move the whole section diagonally
+    $moveSectionUp = $moveSectionUp + 1; //Add 1 to x and y each iteration.
+    $moveSection = $moveSection - 1; //Remove 1 from z each iteration.
+    $removeAmount = $removeAmount + 2; //Remove two blocks from z (and eventually) x sides of the rows we create.
+    DeleteAllHistory;
+}
+}
