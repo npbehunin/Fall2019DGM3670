@@ -1,0 +1,19 @@
+string $names[]  {"Bill", "Mary", "Jonathan"};
+string $fruits[] = {"Apples", "Oranges", "Raspberry"};
+string $veggies[] = {"Carrots", "Celery", "Tomato"};
+
+for ($i=0; $i<size($names); $i++){
+	print ($names[$i]);
+}
+
+for ($i=0; $i<size($fruits); $i++){
+	print ($fruits[$i]);
+}
+
+for ($i=0; $i<size($veggies); $i++){
+	print ($veggies[$i]);
+}
+
+proc PrintArray(){ //"proc" basically means we're making a function (procedure).
+
+}

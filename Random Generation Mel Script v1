@@ -1,0 +1,18 @@
+int $size = 0;
+string $objectName[];
+string $objectList[];
+
+proc GenerateObjects(string $object[], int $amount, int $rangeX, int $rangeZ)
+{
+    for ($i = 0; $i < $amount; $i++)
+    {
+        float $randNumX = `rand (-1 * ($rangeX / 2)) (($rangeX / 2))`;
+        float $randNumZ = `rand (-1 * ($rangeZ / 2)) (($rangeZ / 2))`; 
+        print ($randNumX + ", " + $randNumZ);
+        duplicate $object;
+        move -r -os $randNumX 0 $randNumZ;
+    } 
+}
+
+$objectName = `polyCube`;
+GenerateObjects($objectName, 25, 5, 5);

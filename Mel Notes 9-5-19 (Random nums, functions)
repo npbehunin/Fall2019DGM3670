@@ -1,0 +1,33 @@
+proc InsultGenerator(){
+	string $insults[] = {"Yo mama wears army boots!", "Anthony!", "You're friggin dumb."};
+	
+	int $size = `size($insults)`;
+	float $randNum = `rand $size`;
+	int $index = `floor $randNum`; //Between 0 and 2.
+	//Always use backticks when assigning a variable!
+	
+	print ($insults[$index]);
+}
+
+InsultGenerator();
+
+proc ComplimentGenerator(string $name, int $age){
+	string $compliments[] = {"you are so lovely.", "nice hair.", "you must have eaten a healthy breakfast."};
+	$age -= 7;
+	
+	int $size = `size($compliments)`;
+	float $randNum = `rand $size`;
+	int $index = `floor $randNum`;
+	
+	print ($name + ", " + $compliments[$index] + " you don't look a day over " + $age + "!");
+}
+
+ComplimentGenerator("Bill", 40);
+
+//Random number examples
+//{
+//	rand 10; //Random number between 0 and 10.
+//	rand -10 10; //Random number between -10 and 10.
+//	floor `rand -10 10`; //Round it to the lowest int.
+//}
+
