@@ -1,18 +1,26 @@
-int $size = 0;
-string $objectName[];
-string $objectList[];
+//Generate x amount of objects at a random position within a specified range.
+//Objects will spawn near position 0, 0, 0.
 
-proc GenerateObjects(string $object[], int $amount, int $rangeX, int $rangeZ)
+int $objAmount = 25;
+int $xRange = 10;
+int $zRange = 10;
+vector $spawnPos = <<0,0,0>>;
+string $objectName[];
+
+proc GenerateObjects(string $object, int $amount, int $rangeX, int $rangeZ)
 {
-    for ($i = 0; $i < $amount; $i++)
+    for ($i = 0; $i < $amount - 1; $i++)
     {
         float $randNumX = `rand (-1 * ($rangeX / 2)) (($rangeX / 2))`;
         float $randNumZ = `rand (-1 * ($rangeZ / 2)) (($rangeZ / 2))`; 
-        print ($randNumX + ", " + $randNumZ);
+        print ($randNumX + ", " + $randNumZ + "\n");
         duplicate $object;
+        select -cl;
+        select $object;
+        move 0 0 0;
         move -r -os $randNumX 0 $randNumZ;
     } 
 }
 
 $objectName = `polyCube`;
-GenerateObjects($objectName, 25, 5, 5);
+GenerateObjects($objectName[0], $objAmount, $xRange, $zRange);
