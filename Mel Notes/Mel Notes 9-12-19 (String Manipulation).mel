@@ -1,0 +1,42 @@
+//Homework:
+//A tool that will replace an object's name and count numbers up.
+//Ex: L_Arm_##_Geo (L_Arm_01_Geo)
+
+string $name1[] = {"Bill", "Mary", "Susan"};
+string $name2[] = {"Harry", "Guhuhu", "Frick"};
+appendStringArray($name1, $name2, 2);
+//RESULT: $name1 = {"Bill", "Mary", "Susan", "Harry", "Guhuhu"};
+//"AppendToStringArray" will stick the specified string values from an array to the end of another
+//string array. The int specifies how many items we want to copy over.
+
+string $sel[] = `ls -sl`; //The currently selected objects
+endString($sel[0], 2);
+//Assuming the object's name is polyCube...
+//RESULT: be
+//Returns the last characters of a string and goes until int.
+
+string $sel[] = `ls -sl`; //The currently selected objects
+endsWith($sel[0], "geo");
+//Returns true (1) or false (0) if the string ends with "geo".
+
+string $name1[] = {"Bill", "Mary", "Susan"};
+string $name2[] = {"Harry", "Guhuhu", "Frick"};
+print ("Our names are " + $name1[0] + " and" + $name2[0] + ".");
+format -stringArg $name1[0] -stringArg $name2[0] "Our names are ^1s and ^2s!";
+//Formats the selected strings into a string command. In this case, ^1s and ^2s.
+
+size("Hello");
+//Returns the number of characters in the string.
+
+string $test = "Hello,my,name,is,Carl";
+string $tokens[];
+tokenize $test "," $tokens;
+print $tokens;
+//Takes the string and seperates it depending on the seperator, in this case ",";
+//Stores the strings into a new array ($tokens) AND returns an int.
+
+string $test = "L_Arm_##_Geo";
+string $tokens[];
+tokenize $test "#" $tokens;
+print $tokens;
+//More tokenize. Stores the strings in $tokens and returns "2".

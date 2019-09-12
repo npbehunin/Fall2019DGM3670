@@ -1,0 +1,11 @@
+string $names[] = {"Bill", "Mary", "Jonathan"};
+
+for ($i = 0; $i < size($names); $i++)
+{
+	print ("My name is " + $names[$i]);
+}
+
+for ($thingy in $names)
+{
+	print ("My name is " + $thingy);
+}
