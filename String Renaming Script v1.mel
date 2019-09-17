@@ -1,0 +1,51 @@
+//Renames a string that contains "#" and replaces it with a number.
+//For example, "Leg_##_Jnt" will have the # symbols replaced with appropriate numbers.
+string $selection[] = `ls - sl`;
+    
+proc RenameStringSelection(string $sel[])
+{
+    string $objectName = "Leg";
+    string $nodeType = "Jnt";
+    int $formatSize = 2;
+    
+    if (size($sel) > 0)
+    {
+        for ($i = 0; $i < size($sel); $i++)
+        {
+            int $match = `gmatch $sel[$i] "*#*"`;
+            if ($match == 1)
+            {
+                TokenizeString($sel[$i]);
+            }
+            else
+            {
+                print("Object doesn't have a '#' symbol. Renaming...");
+                string $symbols;
+                for ($i = 0; $i < $formatSize; $i++)
+                {
+                    $symbols = $symbols + "#";
+                }
+                $sel[$i] = $objectName + "_" + $symbols + "_" + $nodeType;
+                TokenizeString($sel[$i]);
+            }
+        }
+    }
+    else
+    {
+        print("\n" + "No objects selected.");
+    }
+}
+
+proc TokenizeString(string $thing)
+{
+    string $splitString[];
+    tokenize $thing "#" $splitString;
+    $thing = $splitString[0] + "1" + $splitString[1];
+    print ("\n" + $thing);
+}
+
+RenameStringSelection($selection);
+
+//(Optional)
+//1. Remove numbers at the end of a string (Ex: Leg_##_Jnt_01)
+

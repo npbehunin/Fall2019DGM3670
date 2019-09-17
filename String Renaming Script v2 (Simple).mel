@@ -1,0 +1,51 @@
+//Renames a string that contains "#" and replaces it with a number.
+//For example, "Leg_##_Jnt" will have the # symbols replaced with appropriate numbers.
+string $selection[] = `ls - sl`;
+string $fakeSelection[] = {"Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt","Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt"};
+proc RenameStringSelection(string $sel[])
+{
+    //string $objectName = "Leg";
+    //string $nodeType = "Jnt";
+    //int $formatSize = 2;
+    int $objNum1 = 0;
+    
+    if (size($sel) > 0)
+    {
+        for ($i = 0; $i < size($sel); $i++)
+        {
+            int $match = `gmatch $sel[$i] "*#*"`;
+            if ($match == 1)
+            {
+                string $splitString[];
+                tokenize $sel[$i] "#" $splitString;
+                $objNum1++;
+                if ($objNum1 < 10)
+                {
+                    $sel[$i] = $splitString[0] + "0" + $objNum1 + $splitString[1];
+                }
+                else
+                {
+                    $sel[$i] = $splitString[0] + $objNum1 + $splitString[1];
+                }
+
+                print ("\n" + $sel[$i]);
+            }
+            else
+            {
+                print ("\n" + $sel[$i] + " must contain '##'.");
+            }
+        }
+    }
+    else
+    {
+        print("\n" + "No objects selected.");
+    }
+}
+
+RenameStringSelection($fakeSelection);
+
+//Possible functions:
+//StringToStringArray
+//Tokenize
+//
+
