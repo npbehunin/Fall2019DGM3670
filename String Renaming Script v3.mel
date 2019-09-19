@@ -1,0 +1,59 @@
+//Replaces a symbol in a string array with a number.
+//The number will increment based on the index of the array.
+//The string must be formatted as "Name_##_NodeType". Any type or number of symbols may be used.
+
+string $selection[] = `ls - sl`;
+string $testSelection1[] = {"Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt", "Leg_####_Jnt"};
+string $testSelection2[] = {"Leg_##_Jnt", "Leg_##_Jnt", "Leg_a_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt", "Leg_##_Jnt"};
+
+string $symbolToReplace = "#";
+int $startNumber = 1;
+    
+proc RenameStringSelection(string $sel[], int $num, string $symbol)
+{
+    if (size($sel) > 0)
+    {
+        for ($i = 0; $i < size($sel); $i++)
+        {
+            string $newString;
+            string $splitString[];
+            tokenize $sel[$i] "_" $splitString;
+            string $symbolString = $splitString[1];
+            
+            string $definedSymbol = "*" + $symbol + "*";
+            int $match = `gmatch $sel[$i] $definedSymbol`;
+            
+            if ($match == 1)
+            {
+                for ($k = 0; $k < size($symbolString); $k++) //FOR EACH # SYMBOL...
+                {
+                    string $objNumberString;
+                    int $a = 0;
+                    $objNumberString = $num;
+                    if (size($objNumberString) <= $k)
+                    {
+                        $newString = $newString + $a; //Add zero.
+                    }
+                }
+                $newString = $newString + $num;  
+                $num++;
+                
+                $sel[$i] = $splitString[0] + "_" + $newString + "_" + $splitString[2];
+                print("\n" + $sel[$i]);
+            }
+            else
+            {
+                print("\n" + $sel[$i] + " does not contain the '" + $symbol + "' symbol. Skipping.");
+            }
+            
+            
+        }
+    }
+    else
+    {
+        print("\n" + "No objects selected.");
+    }
+}
+
+RenameStringSelection($testSelection2, $startNumber, $symbolToReplace);
+
