@@ -1,0 +1,24 @@
+getAttr //Returns the value of the object's attribute. Can be a string, float, etc.
+//Examples:
+int $lock = `getAttr -lock noseCone.translateX`; //"Is it locked?" // Result: 0
+getAttr "pSphere1.translateX"; // Result: The x translation of our pSphere object.
+
+setAttr //Does the opposite. Sets an object's attribute. String, float, etc.
+//Examples:
+setAttr "pSphereShape1.displayEdges" 2; //(This can be found under pSphereShape1 < Mesh Component Display.)
+
+xform //Set any element in a transformation node. Similar to move, rotate, etc.
+//Examples:
+xform -translation 1 2 3 "pSphere1"; //Absolute movement by default. Moves to position 1, 2, 3.
+xform -relative -translation 1 2 3 "pSphere1"; //Relative
+xform -q -translation "pSphere1"; //Query the translation. "Get" the current translation values and move.
+
+//NOTES
+//"Worldspace" moves to the actual point in the scene.
+//"Absolute" moves to a point, but can still be affected by parent values.
+//"Relative" moves relative to the object's position.
+
+//setAttr can also technically set the translateX and other translate values.
+
+
+

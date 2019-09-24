@@ -1,0 +1,26 @@
+//Script that places a locator at the center of the currently selected objects.
+//Can also optionally place a locator at the center of each selected object.
+string $selection[] = `ls - sl`;
+
+proc PlaceCenteredLocator(string $sel[])
+{
+    //float $test[] = `xform -q -bb $sel`; //Error: Can only use one object for a query. It DOES store it as a float array though.
+    //print ($test);
+    
+    for ($i = 0; $i < size($sel); $i++)
+    {
+        spaceLocator -r 0 0 0;
+    }
+    //IDEA 1:
+    //Place locators at each object.
+    //Take each of those locators and combine them.
+    //Pass the combined objects through xform and get the bounding box.
+    //Then just calculate the midpoint of the bounding box. (Divide by 2 on each x, y, and z length)
+}
+
+PlaceCenteredLocator($selection);
+
+//boundingBox (xform Flag) used in...
+//midpoint formula (center of objects)
+
+//Needs to work for any selection of objects. Faces, objects, vertices, etc.
