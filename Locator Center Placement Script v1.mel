@@ -4,23 +4,71 @@ string $selection[] = `ls - sl`;
 
 proc PlaceCenteredLocator(string $sel[])
 {
-    //float $test[] = `xform -q -bb $sel`; //Error: Can only use one object for a query. It DOES store it as a float array though.
-    //print ($test);
-    
+    $matchObjectOrientation = true;
+    float $xPosList[];
+    float $yPosList[];
+    float $zPosList[];
     for ($i = 0; $i < size($sel); $i++)
     {
-        spaceLocator -r 0 0 0;
+        float $test[] = `xform -q -bb -ws $sel[$i]`; //Also works for vertex selection.
+        
+        float $xPos = ($test[0] + $test[3])/2;
+        float $yPos = ($test[1] + $test[4])/2;
+        float $zPos = ($test[2] + $test[5])/2;
+        $xPosList[$i] = $xPos;
+        $yPosList[$i] = $yPos;
+        $zPosList[$i] = $zPos;
+        
+        spaceLocator -p $xPos $yPos $zPos; //Create a locator. (Object center)
+        
+        if ($matchObjectOrientation)
+        {
+            xform -r -ro 0 90 0;
+        }
     }
-    //IDEA 1:
-    //Place locators at each object.
-    //Take each of those locators and combine them.
-    //Pass the combined objects through xform and get the bounding box.
-    //Then just calculate the midpoint of the bounding box. (Divide by 2 on each x, y, and z length)
+    
+    float $xHigh = GetHighestValue($xPosList);
+    float $xLow = GetLowestValue($xPosList);
+    float $yHigh = GetHighestValue($yPosList);
+    float $yLow = GetLowestValue($yPosList);
+    float $zHigh = GetHighestValue($zPosList);
+    float $zLow = GetLowestValue($zPosList);
+    
+    float $xCenter = ($xLow + $xHigh)/2;
+    float $yCenter = ($yLow + $yHigh)/2;
+    float $zCenter = ($zLow + $zHigh)/2;
+    
+    spaceLocator -p $xCenter $yCenter $zCenter; //Create a locator. (Selection center)
+}
+
+//Get the highest float number from a float array.
+proc float GetHighestValue(float $numList[])
+{
+    float $num = $numList[0];
+    for ($j = 0; $j < size($numList); $j++)
+    {
+        if ($numList[$j] > $num)
+        {
+            $num = $numList[$j];
+        }
+    }
+    return $num;
+}
+
+//Get the lowest float number from a float array.
+proc float GetLowestValue(float $numList[])
+{
+    float $num = $numList[0];
+    for ($k = 0; $k < size($numList); $k++)
+    {
+        if ($numList[$k] < $num)
+        {
+            $num = $numList[$k];
+        }
+    }
+    return $num;
 }
 
 PlaceCenteredLocator($selection);
-
-//boundingBox (xform Flag) used in...
-//midpoint formula (center of objects)
 
 //Needs to work for any selection of objects. Faces, objects, vertices, etc.
