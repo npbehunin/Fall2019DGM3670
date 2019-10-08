@@ -103,7 +103,7 @@ proc float Median(float $num[]) //*Unfinished
 //Find the mode.
 proc float Mode(float $num[])
 {
-    float $value = 0;
+    float $previousNum = 0;
     float $highestValue = 1;
     float $modeNum = 0;
     
@@ -111,25 +111,26 @@ proc float Mode(float $num[])
     
     for ($i = 0; $i < size($num); $i++)
     {
-        if ($num[$i] == $value)
+        if ($num[$i] == $previousNum)
         {
             $highestValue++;
         }
         else
         {
-            $value = $num[$i];
+            //$previousNum = $num[$i];
             $highestValue = 1;
         }
         
-        $value = $num[$i];
+        $previousNum = $num[$i];
         
-        if ($modeNum < $highestValue)
+        if ($modeNum < $highestValue) //*Error here.
         {
             $modeNum = $num[$i];
         }
+        print($modeNum);
     }
     return $modeNum;
-    print($modeNum);
+    //print($modeNum);
 }
 
 //Reorder an array.
@@ -157,6 +158,6 @@ proc float[] ArrangeFloatArray(float $num[])
     print ($num);
     return $num;
 }
-
-Median($numbers);
+Mode($numbers);
+//Median($numbers);
 //Mode($numbers);
