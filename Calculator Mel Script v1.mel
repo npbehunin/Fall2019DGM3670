@@ -1,7 +1,8 @@
 //Script that performs different mathematic operations according to users inputs.
 
-float $numbers[] = {7, 6, 1, 2, 2, 2, 5};
+float $numbers[] = {7, 6, 1, 2, 8, 2, 2, 6, 2, 2, 5, 10, 6, 19};
 
+//Add
 proc float Add(float $num[])
 {
     float $value = $num[0];
@@ -11,8 +12,8 @@ proc float Add(float $num[])
     }
     return $value;
 }
-//Add($numbers);
 
+//Subtract
 proc float Subtract(float $num[])
 {
     float $value = $num[0];
@@ -22,8 +23,8 @@ proc float Subtract(float $num[])
     }
     return $value;
 }
-//Subtract($numbers);
 
+//Multiply
 proc float Multiply(float $num[])
 {
     float $value = $num[0];
@@ -33,8 +34,8 @@ proc float Multiply(float $num[])
     }
     return $value;
 }
-//Multiply($numbers);
 
+//Divide
 proc float Divide(float $num[])
 {
     float $value = $num[0];
@@ -44,8 +45,8 @@ proc float Divide(float $num[])
     }
     return $value;
 }
-//Divide($numbers);
 
+//Raise to the power of x.
 proc float Power(float $num, float $power)
 {
     float $value = $num;
@@ -55,8 +56,8 @@ proc float Power(float $num, float $power)
     }
     return $value;
 }
-//Power(3, 3);
 
+//Find the mean
 proc float Mean(float $num[])
 {
     float $value = 0;
@@ -66,46 +67,96 @@ proc float Mean(float $num[])
     }
     return $value / size($num);
 }
-//Mean($numbers);
 
-//proc float Median(float $num[]) //*Unfinished
-//{
-    //float $index1 = size($num)/2]; //The index one number above half.
-    //float $index2 = $index1 - 1; //The index halfway.
-    //return $index1; //Each index must be an int.
-//}
-//Median($numbers);
+//Find the median
+proc float Median(float $num[]) //*Unfinished
+{
+    float $arraySize = size($num);
+    float $medianNum = 0;
+    float $difference = 0;
+    float $halfwayPoint = $arraySize/2;
+    int $roundedPoint = `floor $halfwayPoint`;
+    int $secondPoint = 0;
 
+    ArrangeFloatArray($num);
+
+    if ($halfwayPoint != $roundedPoint) 
+    {
+        $medianNum = $num[$roundedPoint];
+    }
+    else //This means there are two median numbers to check.
+    {
+        $secondPoint = $num[$roundedPoint];
+        $medianNum = $num[$roundedPoint - 1];
+        $difference = $secondPoint - $medianNum;
+        
+        if ($difference != 0)
+        {
+            $difference /= 2;
+        }
+        $medianNum += $difference;
+    }
+    
+    return $medianNum;
+}
+
+//Find the mode.
 proc float Mode(float $num[])
 {
     float $value = 0;
-    float $highestValue = 0;
+    float $highestValue = 1;
     float $modeNum = 0;
+    
+    ArrangeFloatArray($num);
+    
     for ($i = 0; $i < size($num); $i++)
     {
-        float $test = 0;
+        if ($num[$i] == $value)
+        {
+            $highestValue++;
+        }
+        else
+        {
+            $value = $num[$i];
+            $highestValue = 1;
+        }
+        
+        $value = $num[$i];
+        
+        if ($modeNum < $highestValue)
+        {
+            $modeNum = $num[$i];
+        }
+    }
+    return $modeNum;
+    print($modeNum);
+}
+
+//Reorder an array.
+proc float[] ArrangeFloatArray(float $num[])
+{
+    for ($i = 0; $i < size($num); $i++)
+    {
         if (!$i == 0)
         {
             if ($num[$i] < $num[$i-1])
             {
-                floatArrayRemoveAtIndex($i, $num);
                 floatArrayInsertAtIndex($i - 1, $num, $num[$i]); 
+                floatArrayRemoveAtIndex($i + 1, $num);
+                if ($i > 1)
+                {
+                   $i -= 2; 
+                }
+                else
+                {
+                    $i--;
+                }
             }
         }
-        $test = $num[$i];
-        print($test);
-        //Rearrange the array so the numbers are in ascending order.
-        
-        //Then, increase value for each number it passes by.
-        //If the current num is not equal to the last one, run a check in HighestValue.
-        //If the current value is greater than HighestValue, change HighestValue.
-        //If HighestValue changes, store the num in modeNum.
-        if ($num[$i] == $value)
-        {
-            $value += 1;
-        }
-        $value = $num[$i];
     }
-    return 1;
+    print ($num);
+    return $num;
 }
-Mode($numbers);
+
+Median($numbers);
+//Mode($numbers);
