@@ -1,0 +1,111 @@
+//Script that performs different mathematic operations according to users inputs.
+
+float $numbers[] = {7, 6, 1, 2, 2, 2, 5};
+
+proc float Add(float $num[])
+{
+    float $value = $num[0];
+    for ($i = 0; $i < size($num) - 1; $i++)
+    {
+        $value += $num[$i] + 1;
+    }
+    return $value;
+}
+//Add($numbers);
+
+proc float Subtract(float $num[])
+{
+    float $value = $num[0];
+    for ($i = 0; $i < size($num) - 1; $i++)
+    {
+        $value -= $num[$i] + 1;
+    }
+    return $value;
+}
+//Subtract($numbers);
+
+proc float Multiply(float $num[])
+{
+    float $value = $num[0];
+    for ($i = 0; $i < size($num) - 1; $i++)
+    {
+        $value *= $num[$i] + 1;
+    }
+    return $value;
+}
+//Multiply($numbers);
+
+proc float Divide(float $num[])
+{
+    float $value = $num[0];
+    for ($i = 0; $i < size($num) - 1; $i++)
+    {
+        $value /= $num[$i] + 1;
+    }
+    return $value;
+}
+//Divide($numbers);
+
+proc float Power(float $num, float $power)
+{
+    float $value = $num;
+    for ($i = 0; $i < $power - 1; $i++)
+    {
+        $value *= $num;
+    }
+    return $value;
+}
+//Power(3, 3);
+
+proc float Mean(float $num[])
+{
+    float $value = 0;
+    for ($i = 0; $i < size($num); $i++)
+    {
+        $value += $num[$i];
+    }
+    return $value / size($num);
+}
+//Mean($numbers);
+
+//proc float Median(float $num[]) //*Unfinished
+//{
+    //float $index1 = size($num)/2]; //The index one number above half.
+    //float $index2 = $index1 - 1; //The index halfway.
+    //return $index1; //Each index must be an int.
+//}
+//Median($numbers);
+
+proc float Mode(float $num[])
+{
+    float $value = 0;
+    float $highestValue = 0;
+    float $modeNum = 0;
+    for ($i = 0; $i < size($num); $i++)
+    {
+        float $test = 0;
+        if (!$i == 0)
+        {
+            if ($num[$i] < $num[$i-1])
+            {
+                floatArrayRemoveAtIndex($i, $num);
+                floatArrayInsertAtIndex($i - 1, $num, $num[$i]); 
+            }
+        }
+        $test = $num[$i];
+        print($test);
+        //Rearrange the array so the numbers are in ascending order.
+        
+        //Then, increase value for each number it passes by.
+        //If the current num is not equal to the last one, run a check in HighestValue.
+        //If the current value is greater than HighestValue, change HighestValue.
+        //If HighestValue changes, store the num in modeNum.
+        if ($num[$i] == $value)
+        {
+            $value += 1;
+        }
+        $value = $num[$i];
+    }
+    return 1;
+}
+Mode($numbers);
