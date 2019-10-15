@@ -1,7 +1,7 @@
 //Script that performs different mathematic operations according to users inputs.
 
 float $numbers[] = {7, 6, 1, 2, 8, 2, 2, 6, 2, 2, 5, 10, 6, 19};
-float $numbers1[] = {3, 4};
+float $test1[] = {3, 4};
 
 proc float Calculate(string $keyword, float $num[])
 {
@@ -92,8 +92,48 @@ proc float Calculate(string $keyword, float $num[])
                 print($num[$i]);
             }
         }
-        print(" is " + Mean($num) + "\n");
+        print(" is " + Mean($num) + "." + "\n");
         return Mean($num);
+    }
+    //Median
+    else if ($keyword == "Median" || $keyword == "median")
+    {
+        print("The median of ");
+        for ($i = 0; $i < size($num); $i++)
+        {
+            if ($i != size($num)-1)
+            {
+                print($num[$i]);
+                print(", ");
+            }
+            else
+            {
+                print("and ");
+                print($num[$i]);
+            }
+        }
+        print(" is " + Median($num) + "." + "\n");
+        return Median($num);
+    }
+    //Mode
+    else if ($keyword == "Mode" || $keyword == "mode")
+    {
+        print("The mode of ");
+        for ($i = 0; $i < size($num); $i++)
+        {
+            if ($i != size($num)-1)
+            {
+                print($num[$i]);
+                print(", ");
+            }
+            else
+            {
+                print("and ");
+                print($num[$i]);
+            }
+        }
+        print(" is " + Mode($num) + "." + "\n");
+        return Mode($num);
     }
     else
     {
@@ -257,4 +297,4 @@ global proc float[] ArrangeFloatArray(float $num[])
     return $num;
 }
 
-Calculate("mean", $numbers);
+Calculate("median", $numbers);
