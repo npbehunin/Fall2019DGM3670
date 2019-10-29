@@ -1,0 +1,20 @@
+string $mWindow;
+
+//Delete the window if it already exists.
+if (`window -exists $mWindow`)
+    deleteUI -window $mWindow;
+
+//UI Commands, Buttons, Windows, etc.
+
+$mWindow = `window -title "My Window" -widthHeight 200 400`; //Create a window with a size.
+string $mColumn = `columnLayout -p $mWindow -rowSpacing 5 -adjustableColumn 1`; //Create a column that we'll put buttons in.
+button -p $mColumn -label "Print \"Hello World\"" -command "print (\"Hellow World\")";
+button -p $mColumn -label "Print \"Goodbye World\"" -command "PrintArg";
+button -p $mColumn -label "Print \"Hello Darkness\"";
+showWindow $mWindow;
+
+//-command can be used for anything we want once pressed.
+global proc PrintArg()
+{
+    print ("Goodbye World");
+}
