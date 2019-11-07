@@ -1,0 +1,9 @@
+Python stuff
+11-7-19
+
+int
+float
+strings -> "this" "that" "etc."
+list [] ["Hi", 3, 7.6, [1, 2, 3], "Bye] (Is mutable, so it can change.) (Ordered)
+sets {1, 3, 7, "Hi"} (Is NOT mutable and unordered)
+dictionaries {ball : [[x, y, z], [x, y, z], [children]]} (Is mutable, but unordered)
