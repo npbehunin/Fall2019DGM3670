@@ -1,0 +1,17 @@
+//IDEA: A script that can automatically create a group for each desired control on a skeleton.
+
+//IDEA 1:
+    //1. Require the user to select the skeleton they wish to create groups for.
+    //2. The script will create a new group for each joint and rename it according to the user's inputs.
+    //3. Create a second optional function where the user selects the controls they want parented to the groups
+        //and the script will search for similar names and parent the group to the control.
+    //4. Freeze the controls.
+    
+//IDEA 2:
+    //1. Require the user to select all the joints they want a group for.
+    //2. The script creates a group matching the transform of each joint.
+    
+    //1. Require the user to select all the controls they want parented to the groups.
+    //2. The script will search for similar names, then take each matched group and align it in the heirarchy.
+    //3. Any group or control that doesn't get matched will either return an error message, OR a popup window
+        //could appear that lets the user manually pair each group and control.
