@@ -12,6 +12,7 @@ def createControl():
         translation = cmds.xform(jointSel, q=True, ws=True, t=True) 
         control = cmds.circle(c=translation, n='%s_Ctrl' % jointSel, nr=(0, 1, 0))
         cmds.select(control)
+        cmds.sets(add=control, n='ctrlSet')
         
         #Create a group for the control.
         controlGroup = cmds.Group(em=True, r=True)
@@ -23,6 +24,8 @@ def createControl():
         
         #Match the group's rotation to the selection.
         cmds.matchTransform(newGrp, jointSel, rotation=True)
+    
+    cmds.select('ctrlSet')
 
 def colorControl(color):
     
