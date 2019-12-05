@@ -8,6 +8,12 @@ def createControl():
     
     for jointSel in sels:
         
+        #Get translation and rotation.
+        rotation = cmds.xform(jointSel, q=True, ws=True, ro=True)
+        translation = cmds.xform(jointSel, q=True, ws=True, t=True) 
+        
+        #Create a group with the translation and rotation.
+        cmds.Group(em=True, name='%s_Group' % jointSel)
 
 def colorControl(color):
     
@@ -29,3 +35,5 @@ def colorControl(color):
             #cmds.setAttr(shape + '.overrideEnabled', True)
             cmds.setAttr('%s.overrideEnabled' % shape, True) #%s = "I'm gonna insert a string here."
             cmds.setAttr('%s.overrideColor' % shape, color) #6 is dark blue.
+            
+createControl()

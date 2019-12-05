@@ -1,0 +1,83 @@
+//Creates a separate group for each selected object.
+proc createGroups()
+{
+    string $sel[] = `ls -sl`;
+    int $obj = `checkBox -q -v cbName`;
+    string $entry = `textField -q -tx tfGrp`;
+    string $suffix = `textField -q -tx tfSfx`;
+    string $groupName;
+    
+    for ($i = 0; $i < size($sel); $i++)
+    {
+        if ($obj == 1)
+        {
+            $groupName = $sel[$i] + $suffix;  
+        }
+        else
+        {
+            $groupName = $entry + $suffix + ($i + 1);
+        }
+        string $listParent[] = `listRelatives -path -p $sel[$i]`;
+        string $parent = $listParent[0];
+        group -em -name $groupName;
+        parent $sel[$i] $groupName;
+            
+        if ($parent != "")
+        {
+            parent $groupName $parent;
+        }  
+    }
+}
+
+//Create the UI
+proc createWindow()
+{
+    string $mWindow;
+    if (`window -exists $mWindow`)
+    deleteUI -window $mWindow;
+    
+    //UI Stuff
+    $mWindow = `window -title "Create Groups" -widthHeight 300 130`; //Create a window with a size.
+    string $form = `formLayout -numberOfDivisions 100`;
+    
+    text -l "Group name:" txtGrp;
+    textField -w 200 -tx "" tfGrp;
+    text -l "Suffix name:" txtSfx;
+    textField -w 200 -tx "" tfSfx;
+    checkBox -l "Use object's name as group name?" -v 0 -onc enableEntryBar -ofc disableEntryBar cbName;
+    button -l "Create groups" -w 200 -h 30 -c "createGroups()" btnCreate;
+    
+    formLayout -e
+        -af txtGrp "left" 10
+        -af txtGrp "top" 10
+        
+        -af tfGrp "left" 85
+        -af tfGrp "top" 7
+        
+        -af txtSfx "left" 10
+        -af txtSfx "top" 35
+        
+        -af tfSfx "left" 85
+        -af tfSfx "top" 32
+        
+        -af cbName "top" 60
+        -af cbName "left" 10
+        
+        -af btnCreate "top" 85
+        -af btnCreate "left" 50
+        
+    $form;
+    showWindow $mWindow;
+}
+
+proc enableEntryBar()
+{
+    textField -e -en 0 tfGrp;
+}
+
+proc disableEntryBar()
+{
+    textField -e -en 1 tfGrp;
+}
+
+createWindow()
