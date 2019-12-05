@@ -8,12 +8,21 @@ def createControl():
     
     for jointSel in sels:
         
-        #Get translation and rotation.
-        rotation = cmds.xform(jointSel, q=True, ws=True, ro=True)
+        #Create a control at the selection's translation.
         translation = cmds.xform(jointSel, q=True, ws=True, t=True) 
+        control = cmds.circle(c=translation, n='%s_Ctrl' % jointSel, nr=(0, 1, 0))
+        cmds.select(control)
         
-        #Create a group with the translation and rotation.
-        cmds.Group(em=True, name='%s_Group' % jointSel)
+        #Create a group for the control.
+        controlGroup = cmds.Group(em=True, r=True)
+        newGrp = cmds.rename(controlGroup, '%s_Ctrl_Group' % jointSel)
+        
+        #Reset the control's pivot.
+        cmds.xform(controlGroup, cp=True)
+        cmds.xform(control, cp=True)
+        
+        #Match the group's rotation to the selection.
+        cmds.matchTransform(newGrp, jointSel, rotation=True)
 
 def colorControl(color):
     
