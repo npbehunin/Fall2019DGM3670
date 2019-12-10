@@ -36,7 +36,6 @@ class calculator():
         print(result)
         return result
         
-#import calculator #This can be run just once
-#myCalc = calculator()
-#help(myCalc)
-#myCalc.Subtract([3, 6, 8])
+import calculator #This can be run just once
+myCalc = calculator()
+myCalc.Subtract([3, 6, 8])
