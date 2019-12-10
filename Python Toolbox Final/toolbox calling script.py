@@ -1,7 +1,8 @@
 #This is the script we run to access our toolbox script.
 #Make sure each script file is located in documents > maya > scripts!
 
-import toolbox
+import NateToolbox
 
-myTB = toolbox.Toolbox()
+reload(NateToolbox)
+myTB = NateToolbox.NateToolbox()
 myTB.create()
