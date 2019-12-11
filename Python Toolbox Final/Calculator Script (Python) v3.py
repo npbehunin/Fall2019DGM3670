@@ -11,7 +11,7 @@ class calculator():
         result = num[0]
         for i in num:
             if i != num[0]:
-                result += i
+                result = round(result + i, 2)
         print(result)
         return result
     
@@ -20,7 +20,7 @@ class calculator():
         result = num[0]
         for i in num:
             if i != num[0]:
-                result -= i
+                result = round(result - i, 2)
         print(result)
         return result
 
@@ -29,7 +29,7 @@ class calculator():
         result = num[0]
         for i in num:
             if i != num[0]:
-                result *= i
+                result = round(result * i, 2)
         print(result)
         return result
 
@@ -38,16 +38,16 @@ class calculator():
         result = num[0]
         for i in num:
             if i != num[0]:
-                result /= i
+                result = round(result / i, 2)
         print(result)
         return result
         
-    #Raise to the power of x
+    #Multiply the first number by the exponent of the second number
     def Exponent(self, num):
         result = num[0]
         i = 1
         while i < num[1]:
-            result *= num[0]
+            result = round(result * num[0], 2)
             i += 1
         print(result)
         return result
@@ -69,8 +69,6 @@ class calculator():
         length = len(num)
         divFloat = round(float(length)/float(2), 2)
         divNormal = length/2
-        print(divNormal)
-        print(divFloat)
         
         if divFloat == divNormal: #The median is inbetween two numbers
             difference = float(num[divNormal] - num[divNormal - 1])
@@ -86,6 +84,7 @@ class calculator():
         lastNum = 0
         currentCount = 0
         highestCount = 0
+        mode = []
         
         for i in num:
             if currentCount == 0:
@@ -97,23 +96,34 @@ class calculator():
                     currentCount = 1
                 if highestCount < currentCount:
                     highestCount = currentCount
+                    mode = []
+                    if i not in mode:
+                        mode.append(i)
+                elif highestCount == currentCount:
+                    if i not in mode:
+                        mode.append(i)
             
             lastNum = i
-        print(highestCount)
-        return highestCount      
+        if highestCount != 1:
+            print(mode)
+            return mode    
+        else:
+            print('No mode found.')
+            return 0
         
     #Arrange a list of numbers
     def Arrange(self, num):
         i = 0
-        for a in num:
-            i = 0
-            for b in num:
-                if b <= a:
-                    num.remove(a)
-                    num.insert(i-1, a)
-                i += 1
+        max = 0
+        while i < len(num):
+            if i != len(num)-1:
+                if num[i] > num[i+1]:
+                    num.append(num[i])
+                    num.remove(num[i])
+                    i = -1 
+            i += 1
         print(num)
         return num
         
 myCalc = calculator()
-myCalc.Arrange([1, 9, 6.5, 5, 31, 9, 1, 9.75, 9, 1])
+myCalc.Add([3.563, 1, 11])

@@ -53,14 +53,17 @@ def controlToolCreate():
     windowName = 'CreateControlWindow'
     if cmds.window(windowName, exists=True):
         cmds.deleteUI(windowName)
-    windowName = cmds.window(windowName, widthHeight=(100, 300))
+    windowName = cmds.window(windowName, widthHeight=(100, 200), rtf=True)
     m_column = cmds.columnLayout(p=windowName, adj=True)
-    cmds.button(p=m_column, label='Create Control at selection', c=lambda *args: createControl())
+    cmds.separator(p=m_column, h=10, style='in')
+    cmds.text(p=m_column, l='Nurb Control Creation Tool')
+    cmds.separator(p=m_column, h=10, style='in')
+    cmds.button(p=m_column, label='Create Control at selection', h=50, c=lambda *args: createControl())
     cmds.separator(p=m_column, h=10, style='in')
     textTest = cmds.text(p=m_column, l='Selected color: %s ' % 'Light Gray')
     slider = cmds.intSliderGrp(p=m_column, l='Color: ', min=0, max=31, value=0, step=1, cc=lambda *args: changeSliderValue(textTest))
-    cmds.separator(p=m_column, h=10, style='in')
-    cmds.button(p=m_column, label='Change Color', c=lambda *args: colorControl(cmds.intSliderGrp(slider, q=True, value=True)))
+    cmds.separator(p=m_column, h=5, style='none')
+    cmds.button(p=m_column, label='Change Color', h=50, c=lambda *args: colorControl(cmds.intSliderGrp(slider, q=True, value=True)))
     cmds.showWindow(windowName)
    
 #Output a string based on the value of the slider. 
@@ -134,5 +137,3 @@ def changeSliderValue(textTest):
     else:
         color = 'Light Gray'
     test = cmds.text(textTest, e=True, l='Selected color: %s' % color)
-    
-controlToolCreate()
